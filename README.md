@@ -1,9 +1,9 @@
-# netsweeper
+### netsweeper
 Python class to allow programmers to create easily your own net sweeper scripts.
 
 Class to allow the creation of Netsweeper programs in Python
 
-"""Functions:
+Functions:
 __init__:
     (Constructor)
     Args:
@@ -49,4 +49,4 @@ __init__:
         packetcount (READ/WRITE)
             int: define the number of icmp packets send to the destination host
 
-Uses the ping() function from the library ping3 developed by kai@kyan001.com https://github.com/kyan001/ping3"""
+Uses the ping() function from the library ping3 developed by kai@kyan001.com https://github.com/kyan001/ping3
