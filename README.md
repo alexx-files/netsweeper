@@ -25,7 +25,7 @@ Key: IP Address in integer format (Interger format is easier to sort IP addresse
 Value: Turple of four values:
   (str:ip address,
   boolean: Host up=True Host down=False,
-  float: ping delay time (return the value of ping_timeout argument when the ping timeout,
+  float: ping delay time # return the value of ping_timeout argument when the ping timeout,
   str: The IP address hostname)
 ```
 
@@ -50,6 +50,38 @@ Scanning the network: 192.168.0.0/24
 Elapsed time: 6.83 seconds
 Found 5 hosts up in the network 192.168.0.0/24.
 ```
+#### Properties
+```
+networkaddress (READ/WRITE)
+    str: define network address to be scanned
+num_threads (READ/WRITE)
+    int: define number of ping threads
+timeout (READ/WRITE)
+    int: define delay time until timeout
+results (READ ONLY)
+    dictionary: store network scan results
+    Structure:
+        Key: int IP Address (Interger is easier to sort IP addresses than string)
+        Value: Turple of four values:
+            (str:ip address,
+             boolean: Host up=True Host down=False,
+             float: ping delay time (return the value of ping_timeout argument when the ping timeout,
+             str: The IP address hostname)
+down_hosts (READ/WRITE)
+    boolean: define if return or not the not found hosts. Default = False
+return_unit (READ/WRITE)
+    str: define the return unit for reply time (s) secs or (ms) mili secs
+src_addr (READ/WRITE)
+    str: define ping source address
+packet_ttl (READ/WRITE)
+    int: define icmp packet time to live
+icmp_seq (READ/WRITE)
+    int: define icmp packet sequence
+payload_size (READ/WRITE)
+    int: define icmp packet payload size
+retrycount (READ/WRITE)
+    int: define the number of tries to send before timeout
+```
 
 ## Examples
 
@@ -69,4 +101,3 @@ This example show the optional parameters for ping and icmp packet.
 This is more complex example. It show how to run netsweeper with no interaction and how to interact with 
 scan results stored in the property 'results'.
 ```
-

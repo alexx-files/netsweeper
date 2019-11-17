@@ -15,7 +15,7 @@ scan.src_addr = '192.168.100.101'  # set the source IP address
 scan.packet_ttl = 32  # set icmp packet time to live
 scan.icmp_seq = 0  # set icmp packet sequence
 scan.payload_size = 56  # set icmp packet payload size
-scan.packetcount = 3  # set the number of tries until timeout. Increase the scan time.
+scan.retrycount = 3  # set the number of tries until timeout. Increase the scan time.
 
 scan.verbose_run()  # scan the network in verbose mode. The results are printed in Python console.
 

@@ -33,10 +33,10 @@ class NetSweeper:
                 int: define number of ping threads
             timeout (READ/WRITE)
                 int: define delay time until timeout
-            scan_results (READ ONLY)
+            results (READ ONLY)
                 dictionary: store results of network scan
                 Structure:
-                    Key: IP Address in integer format (Interger format is easier to sort IP addresses than string)
+                    Key: int IP Address (Interger is easier to sort IP addresses than string)
                     Value: Turple of four values:
                         (str:ip address,
                          boolean: Host up=True Host down=False,
@@ -54,8 +54,8 @@ class NetSweeper:
                 int: define icmp packet sequence
             payload_size (READ/WRITE)
                 int: define icmp packet payload size
-            packetcount (READ/WRITE)
-                int: define the number of icmp packets send to the destination host
+            retrycount (READ/WRITE)
+                int: define the number of retries to send before timeout
 
     Uses the ping() function from the library ping3 developed by kai@kyan001.com https://github.com/kyan001/ping3"""
 
@@ -70,7 +70,7 @@ class NetSweeper:
         self._packet_ttl = 64  # int: define icmp packet time to live
         self._icmp_seq = 0  # int: define icmp packet sequence
         self._payload_size = 56  # int: define icmp packet payload size
-        self._packetcount = 1  # int: define the number of icmp packets send to the destination host
+        self._retrycount = 1  # int: define the number of tries to send before timeout
 
     ########################################################################################################################
     #  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  GETTERS AND SETTERS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
@@ -85,12 +85,12 @@ class NetSweeper:
         self._return_unit = return_unit
 
     @property
-    def packetcount(self):
-        return self._packetcount
+    def retrycount(self):
+        return self._retrycount
 
-    @packetcount.setter
-    def packetcount(self, packetcount):
-        self._packetcount = packetcount
+    @retrycount.setter
+    def retrycount(self, retrycount):
+        self._retrycount = retrycount
 
     @property
     def payload_size(self):
@@ -185,7 +185,7 @@ class NetSweeper:
 
         ipaddress = str(ipaddress)
         ping_ip = 0
-        for _ in range(self._packetcount):
+        for _ in range(self._retrycount):
             ping_ip = ping(dest_addr=ipaddress, timeout=ping_timeout, unit=self._return_unit, src_addr=self._src_addr,
                            ttl=self._packet_ttl, seq=self._icmp_seq, size=self._payload_size)
             if type(ping_ip) == float:
