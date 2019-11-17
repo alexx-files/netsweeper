@@ -13,8 +13,7 @@ pip install netsweeper  # install nesweeper
 >>> from netsweeper import NetSweeper
 >>> scan = NetSweeper('192.168.0.0/24', 100, 1)
 >>> scan.verbose_run()
-
-0.215697261510079666
+```
 
     Functions:
     __init__:
