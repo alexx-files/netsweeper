@@ -12,6 +12,23 @@ pip install netsweeper  # install netsweeper
 ```
 ## Usage
 
+#### No Interaction Mode
+```
+from netsweeper import NetSweeper
+scan = NetSweeper('192.168.0.0/24', 100, 1)
+scan.run()
+```
+A dictionary is stored in the property 'results' with the scan results.
+The property 'results' is read only and have the following structure:
+```
+Key: IP Address in integer format (Interger format is easier to sort IP addresses than string)
+Value: Turple of four values:
+  (str:ip address,
+  boolean: Host up=True Host down=False,
+  float: ping delay time (return the value of ping_timeout argument when the ping timeout,
+  str: The IP address hostname)
+```
+
 #### Verbose Mode
 ```
 from netsweeper import NetSweeper
@@ -34,23 +51,6 @@ Elapsed time: 6.83 seconds
 Found 5 hosts up in the network 192.168.0.0/24.
 ```
 
-
-#### No Interaction Mode
-```
-from netsweeper import NetSweeper
-scan = NetSweeper('192.168.0.0/24', 100, 1)
-scan.run()
-```
-A dictionary is stored in the property 'results' with the scan results.
-The property 'results' is read only and have the following structure:
-```
-Key: IP Address in integer format (Interger format is easier to sort IP addresses than string)
-Value: Turple of four values:
-  (str:ip address,
-  boolean: Host up=True Host down=False,
-  float: ping delay time (return the value of ping_timeout argument when the ping timeout,
-  str: The IP address hostname)
-```
 ## Examples
 
 ### example_verbose.py
