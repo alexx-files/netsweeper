@@ -21,7 +21,7 @@ scan.verbose_run()
 The results are printed in the Python console:
 
 ```
-Scanning the network: 192.168.100.0/24
+Scanning the network: 192.168.000.0/24
 
 192.168.0.1   True      4ms	router
 192.168.0.10  True      4ms	WindowsLaptop1
