@@ -10,11 +10,18 @@ Python class to allow programmers to create easily your own net sweeper scripts.
 pip install netsweeper  # install nesweeper
 ```
 ## Usage
-```
-from netsweeper import NetSweeper
-scan = NetSweeper('192.168.0.0/24', 100, 1)
-scan.verbose_run()
-```
+    # Verbose Mode
+    ```
+    from netsweeper import NetSweeper
+    scan = NetSweeper('192.168.0.0/24', 100, 1)
+    scan.verbose_run()
+    ```
+    # No Interaction Mode
+    ```
+    from netsweeper import NetSweeper
+    scan = NetSweeper('192.168.0.0/24', 100, 1)
+    scan.run()
+    ```
 
     Functions:
     __init__:
