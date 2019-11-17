@@ -72,9 +72,9 @@ class NetSweeper:
         self._payload_size = 56  # int: define icmp packet payload size
         self._packetcount = 1  # int: define the number of icmp packets send to the destination host
 
-########################################################################################################################
-#  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  GETTERS AND SETTERS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-########################################################################################################################
+    ########################################################################################################################
+    #  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  GETTERS AND SETTERS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+    ########################################################################################################################
 
     @property
     def return_unit(self):
@@ -167,9 +167,9 @@ class NetSweeper:
         except Exception:
             return 'Hostname not found'
 
-########################################################################################################################
-#  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  INTERNAL FUNCTION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-########################################################################################################################
+    ########################################################################################################################
+    #  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  INTERNAL FUNCTION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+    ########################################################################################################################
 
     def _ping_address(self, ipaddress, ping_timeout):
         """Ping an IP address
@@ -195,9 +195,9 @@ class NetSweeper:
         else:
             return ipaddress, False, ping_timeout * 1000, ''
 
-########################################################################################################################
-#  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  CLASS METHODS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-########################################################################################################################
+    ########################################################################################################################
+    #  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  CLASS METHODS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+    ########################################################################################################################
 
     def run(self):
         """Execute the network scan using threads. The results are stored in the property 'results'.
@@ -224,26 +224,32 @@ class NetSweeper:
         See properties documentation for more details.
         Show the results formatted in the Python console"""
         start = perf_counter()
-        print(f'\nScanning the network: {self._networkaddress}\n')
+        # print(f'\nScanning the network: {self._networkaddress}\n')
+        print('\nScanning the network: {}\n'.format(self._networkaddress))
         self.return_unit = 'ms'
         self.run()
         for key in sorted(self.results.keys()):
             if self.results[key][2] <= 100:
-                print(
-                    f'{self.results[key][0]:<16s}{str(self.results[key][1]):<7s}\033[32m{self.results[key][2]:>4.0f}ms'
-                    f'\033['f'0m\t{self.results[key][3]}')
+                # print(
+                # f'{self.results[key][0]:<16s}{str(self.results[key][1]):<7s}\033[32m{self.results[key][2]:>4.0f}ms'
+                # f'\033['f'0m\t{self.results[key][3]}')
+                print('{} {} \033[32m{:.2f}ms\033[0m\t{}'.format(self.results[key][0], str(self.results[key][1]),
+                                                           self.results[key][2], self.results[key][3]))
             elif self.results[key][2] <= 500:
-                print(
-                    f'{self.results[key][0]:<16s}{str(self.results[key][1]):<7}\033[33m{self.results[key][2]:>4.0f}ms'
-                    f'\033['f'0m\t{self.results[key][3]}')
+                #print(
+                #    f'{self.results[key][0]:<16s}{str(self.results[key][1]):<7}\033[33m{self.results[key][2]:>4.0f}ms'
+                #    f'\033['f'0m\t{self.results[key][3]}')
+                print('{} {} \033[33m{:.2f}ms\033[0m\t{}'.format(self.results[key][0], str(self.results[key][1]),
+                                                           self.results[key][2], self.results[key][3]))
             else:
-                print(
-                    f'{self.results[key][0]:<16s}{str(self.results[key][1]):<7}\033[31m{self.results[key][2]:>4.0f}ms'
-                    f'\033['f'0m\t{self.results[key][3]}')
+                #print(
+                #    f'{self.results[key][0]:<16s}{str(self.results[key][1]):<7}\033[31m{self.results[key][2]:>4.0f}ms'
+                #    f'\033['f'0m\t{self.results[key][3]}')
+                print('{} {} \033[31m{:.2f}ms\033[0m\t{}'.format(self.results[key][0], str(self.results[key][1]), self.results[key][2], self.results[key][3]))
         end = perf_counter()
-        print(f'\nElapsed time: {round(end - start, 2)} seconds')
+        print('\nElapsed time: {} seconds', format(round(end - start, 2)))
         hosts_up = 0
         for result in self.results:
             if self.results[result][1]:
                 hosts_up += 1
-        print(f'Found {hosts_up} hosts up in the network {self._networkaddress}.')
+        print('Found {} hosts up in the network {}.'.format(hosts_up, self._networkaddress))

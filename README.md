@@ -1,5 +1,6 @@
-# netsweeper
-Python class to allow programmers to create easily your own net sweeper scripts.
+netsweeper
+Python class to allow programmers to create easily your own net sweeper scripts. '
+The examples added to the package already are net sweepers that can be used and improved',
 
 Class to allow the creation of Netsweeper programs in Python
 
