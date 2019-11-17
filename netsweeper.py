@@ -203,7 +203,7 @@ class NetSweeper:
         """Execute the network scan using threads. The results are stored in the property 'results'.
         See properties documentation for more details."""
         self._scan_results.clear()  # Clear results of previous scans
-        self._networkaddress = ip_network(self._networkaddress)  # convert _networkaddress from string to networkaddress
+        self._networkaddress = list(ip_network(self._networkaddress).hosts())  # convert from string to networkaddress
         timeout_list = []
         for _ in self._networkaddress:  # create a list with timeout value in all positions
             timeout_list.append(self._timeout)
