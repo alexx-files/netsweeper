@@ -54,7 +54,7 @@ Value: Turple of four values:
 
 ### example_verbose.py
 ```
-This example show the simpler way to use netsweeper to scan a network. Only three parameters are passed
+This example show the simpler way to use netsweeper to scan a network. Only three parameters are passed 
 and the results are printed in the Python console.
 ```
 
@@ -65,7 +65,7 @@ This example show the optional parameters for ping and icmp packet.
 
 ### example.py
 ```
-This is more complex example. It show how to run netsweeper with no interaction and how to interact with
+This is more complex example. It show how to run netsweeper with no interaction and how to interact with 
 scan results stored in the property 'results'.
 ```
 
