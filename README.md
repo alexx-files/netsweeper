@@ -11,7 +11,7 @@ pip install netsweeper  # install nesweeper
 ```
 ## Usage
 
-### Verbose Mode
+#### Verbose Mode
 ```
 from netsweeper import NetSweeper
 scan = NetSweeper('192.168.0.0/24', 100, 1)
@@ -19,7 +19,7 @@ scan.verbose_run()
 ```
 
 
-### No Interaction Mode
+#### No Interaction Mode
 ```
     from netsweeper import NetSweeper
 scan = NetSweeper('192.168.0.0/24', 100, 1)
