@@ -7,7 +7,7 @@ Python class to allow programmers to create easily your own net sweeper scripts.
 ## Installation
 
 ```shell
-pip install netsweeper  # install nesweeper
+pip install netsweeper  # install netsweeper
 ```
 ## Usage
 
