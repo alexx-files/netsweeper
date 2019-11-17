@@ -5,7 +5,7 @@ setup(
     version='0.2.2',
     description='Python class to allow programmers to create easily your own net sweeper scripts.',
     long_description='Python class to allow programmers to create easily your own net sweeper scripts. '
-                     'The examples added to the package already are net sweepers that can be used and improved',
+                     'The examples added to the package already are net sweepers that can be used and improved.',
     author='Alexsandro Camargo',
     py_modules=['netsweeper'],
     author_email='alexx.files@gmail.com',
