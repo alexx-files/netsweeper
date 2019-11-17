@@ -15,9 +15,11 @@ pip install netsweeper  # install nesweeper
 ```
 from netsweeper import NetSweeper
 scan = NetSweeper('192.168.0.0/24', 100, 1)
-scan.verbose_run()```
+scan.verbose_run()
+```
 
 The results are printed in the Python console:
+
 ```
 Scanning the network: 192.168.100.0/24
 
