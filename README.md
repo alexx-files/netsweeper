@@ -44,7 +44,7 @@ A dictionary is stored in the property 'results' with the scan results.
 The property 'results' is read only and have the following structure:
 Key: IP Address in integer format (Interger format is easier to sort IP addresses than string)
 Value: Turple of four values:
-    (str:ip address,
-     boolean: Host up=True Host down=False,
-     float: ping delay time (return the value of ping_timeout argument when the ping timeout,
-     str: The IP address hostname)
+(str:ip address,
+boolean: Host up=True Host down=False,
+float: ping delay time (return the value of ping_timeout argument when the ping timeout,
+str: The IP address hostname)
