@@ -10,19 +10,21 @@ Python class to allow programmers to create easily your own net sweeper scripts.
 pip install netsweeper  # install nesweeper
 ```
 ## Usage
-    # Verbose Mode
     ```
+    Verbose Mode
     from netsweeper import NetSweeper
     scan = NetSweeper('192.168.0.0/24', 100, 1)
     scan.verbose_run()
     ```
-    # No Interaction Mode
+    
     ```
-    from netsweeper import NetSweeper
+    No Interaction Mode
+        from netsweeper import NetSweeper
     scan = NetSweeper('192.168.0.0/24', 100, 1)
     scan.run()
     ```
-
+    
+    ```
     Functions:
     __init__:
         (Constructor)
@@ -68,5 +70,5 @@ pip install netsweeper  # install nesweeper
             int: define icmp packet payload size
         packetcount (READ/WRITE)
             int: define the number of icmp packets send to the destination host
-
+```
 Uses the ping() function from the library ping3 developed by kai@kyan001.com https://github.com/kyan001/ping3
