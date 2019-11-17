@@ -1,7 +1,14 @@
 ### netsweeper
-Python class to allow programmers to create easily your own net sweeper scripts.
+Python class to allow programmers to create easily your own net sweeper scripts. The examples added to the package already are net sweepers that can be used and improved
 
-Class to allow the creation of Netsweeper programs in Python
+> Requires Ping3 https://github.com/kyan001/ping3 (Downloaded automaticaly)
+> Tested under Linux and Windows
+
+## Installation
+
+```shell
+pip install netsweeper  # install nesweeper
+```
 
     Functions:
     __init__:
