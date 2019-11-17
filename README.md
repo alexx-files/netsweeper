@@ -54,7 +54,7 @@ Value: Turple of four values:
 
 ### example_verbose.py
 ```
-This exampler show the simpler way to use netsweeper to scan a network. Only three parameters are passed 
+This example show the simpler way to use netsweeper to scan a network. Only three parameters are passed 
 and the results are printed in the Python console.
 ```
 
