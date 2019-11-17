@@ -43,7 +43,7 @@ class NetSweeper:
                          float: ping delay time (return the value of ping_timeout argument when the ping timeout,
                          str: The IP address hostname)
             down_hosts (READ/WRITE)
-                boolean: define if return or not the not found hosts
+                boolean: define if return or not the not found hosts. Default = False
             return_unit (READ/WRITE)
                 str: define the return unit for reply time (s) secs or (ms) mili secs
             src_addr (READ/WRITE)
@@ -64,7 +64,7 @@ class NetSweeper:
         self._num_threads = num_threads  # int: define number of ping threads
         self._timeout = timeout  # int: define delay time until timeout
         self._scan_results = {}  # dct: results of network scan
-        self._return_down_hosts = True  # boo: define if return or not the not found hosts
+        self._return_down_hosts = False  # boo: define if return or not the not found hosts
         self._return_unit = 's'  # str: define the return unit for reply time (s) secs or (ms) mili secs
         self._src_addr = None  # str: define ping source address
         self._packet_ttl = 64  # int: define icmp packet time to live
