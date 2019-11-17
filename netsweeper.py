@@ -200,7 +200,7 @@ class NetSweeper:
 ########################################################################################################################
 
     def run(self):
-        """Execute the network scan using threads. The results are stored in the property scan_results.
+        """Execute the network scan using threads. The results are stored in the property 'results'.
         See properties documentation for more details."""
         self._scan_results.clear()  # Clear results of previous scans
         self._networkaddress = ip_network(self._networkaddress)  # convert _networkaddress from string to networkaddress
@@ -220,7 +220,7 @@ class NetSweeper:
                         self._scan_results[ip_address(result[0])] = result
 
     def verbose_run(self):
-        """Execute the network scan using threads. The results are stored in the property scan_results.
+        """Execute the network scan using threads. The results are stored in the property 'results'.
         See properties documentation for more details.
         Show the results formatted in the Python console"""
         start = perf_counter()
