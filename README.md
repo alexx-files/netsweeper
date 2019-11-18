@@ -1,4 +1,5 @@
 # netsweeper
+[![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg)]()
 Python class to allow programmers to easily create your own net sweeper scripts. The examples provided already
 are net sweepers that can be used and improved.
 
