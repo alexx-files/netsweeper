@@ -71,6 +71,7 @@ results (READ ONLY)
              str: The IP address hostname)
 
 Optional parameters can be set to change the scan behavior:
+
 down_hosts (READ/WRITE)
     boolean: define if return or not the not found hosts. Default = False
 return_unit (READ/WRITE)
