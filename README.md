@@ -109,8 +109,8 @@ scan results stored in the property 'results'.
 ## Future functionalities before v1.0
 ```
 1. Scan IP ranges
-2. Scan IP Address
-3. Use txt file as source of destination IP address
+2. Scan IP address
+3. Use txt files as source for destination IP address
 4. Port Scan:
     TCP Half Open
     TCP Connect
