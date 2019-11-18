@@ -6,7 +6,7 @@ Where:
     '192.168.100.0/24': Network to be scanned.
     100: Number of simultaneos ping threads. More threads equals to fast scans, but more errors in unreliable networks.
     1: delay time to timeout. Lower values equals to fast scans, but more timeouts in unreliable networks.
-    To simpler example see example_verbose.py
+    For simpler example see example_verbose.py
 """
 
 scan.return_down_hosts = False  # Do not return not found hosts. Not necessary as the default value is already False
