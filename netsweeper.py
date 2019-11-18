@@ -227,7 +227,7 @@ class NetSweeper:
         Show the results formatted in the Python console"""
         start = perf_counter()
         # print(f'\nScanning the network: {self._networkaddress}\n')
-        print('\nNetSweeper version 0.2.4')
+        print('\nNetSweeper version 0.2.5')
         print('Scanning the network: {}\n'.format(self._networkaddress))
         self.return_unit = 'ms'
         self.run()

@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='netsweeper',
-    version='0.2.4',
+    version='0.2.5',
     description='Python class to allow programmers to create easily your own net sweeper scripts.',
     long_description='Python class to allow programmers to create easily your own net sweeper scripts. '
                      'The examples added to the package already are net sweepers that can be used and improved.',
@@ -21,8 +21,8 @@ setup(
         'Intended Audience :: Developers',
         'Topic :: Security',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 3',
     ],
-    python_requires='>=2'
+    python_requires='>=3'
 )
 
