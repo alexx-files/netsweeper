@@ -2,14 +2,14 @@ from setuptools import setup, find_packages
 
 setup(
     name='netsweeper',
-    version='0.2.2',
+    version='0.2.3',
     description='Python class to allow programmers to create easily your own net sweeper scripts.',
     long_description='Python class to allow programmers to create easily your own net sweeper scripts. '
                      'The examples added to the package already are net sweepers that can be used and improved.',
     author='Alexsandro Camargo',
     py_modules=['netsweeper'],
     author_email='alexx.files@gmail.com',
-    download_url='https://github.com/alexx-files/netsweeper/archive/0.2.2.tar.gz',
+    download_url='https://github.com/alexx-files/netsweeper/archive/0.2.3.tar.gz',
     license='MIT',
     packages=find_packages(include=['exampleproject', 'exampleproject.*']),
     install_requires=[
@@ -23,6 +23,6 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2',
     ],
-    python_requires='>=3'
+    python_requires='>=2'
 )
 
