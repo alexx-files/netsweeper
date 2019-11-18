@@ -69,6 +69,8 @@ results (READ ONLY)
              boolean: Host up=True Host down=False,
              float: ping delay time (return the value of ping_timeout argument when the ping timeout,
              str: The IP address hostname)
+
+Optional parameters can be set to change the scan behavior:
 down_hosts (READ/WRITE)
     boolean: define if return or not the not found hosts. Default = False
 return_unit (READ/WRITE)
