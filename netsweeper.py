@@ -236,19 +236,20 @@ class NetSweeper:
                 # print(
                 # f'{self.results[key][0]:<16s}{str(self.results[key][1]):<7s}\033[32m{self.results[key][2]:>4.0f}ms'
                 # f'\033['f'0m\t{self.results[key][3]}')
-                print('{:<16s} {}\t \033[32m{:.0f}ms\033[0m\t{}'.format(self.results[key][0], str(self.results[key][1]),
-                                                           self.results[key][2], self.results[key][3]))
+                print('{:<16s} {:<4s} \033[32m{:>4.0f}ms\033[0m\t{}'.format(self.results[key][0], str(self.results[key][1]),
+                                                                        self.results[key][2], self.results[key][3]))
             elif self.results[key][2] <= 500:
-                #print(
+                # print(
                 #    f'{self.results[key][0]:<16s}{str(self.results[key][1]):<7}\033[33m{self.results[key][2]:>4.0f}ms'
                 #    f'\033['f'0m\t{self.results[key][3]}')
-                print('{:<16s} {}\t \033[33m{:.0f}ms\033[0m\t{}'.format(self.results[key][0], str(self.results[key][1]),
-                                                           self.results[key][2], self.results[key][3]))
+                print('{:<16s} {:<4s} \033[33m{:>4.0f}ms\033[0m\t{}'.format(self.results[key][0], str(self.results[key][1]),
+                                                                        self.results[key][2], self.results[key][3]))
             else:
-                #print(
+                # print(
                 #    f'{self.results[key][0]:<16s}{str(self.results[key][1]):<7}\033[31m{self.results[key][2]:>4.0f}ms'
                 #    f'\033['f'0m\t{self.results[key][3]}')
-                print('{:<16s} {}\t \033[31m{:.0f}ms\033[0m\t{}'.format(self.results[key][0], str(self.results[key][1]), self.results[key][2], self.results[key][3]))
+                print('{:<16s} {:<4s} \033[31m{:>4.0f}ms\033[0m\t{}'.format(self.results[key][0], str(self.results[key][1]),
+                                                                        self.results[key][2], self.results[key][3]))
         end = perf_counter()
         print('\nElapsed time: {} seconds'.format(round(end - start, 2)))
         hosts_up = 0
