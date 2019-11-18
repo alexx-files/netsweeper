@@ -6,7 +6,7 @@ Where:
     '192.168.100.0/24': Network to be scanned.
     100: Number of simultaneos ping threads. More threads equals to fast scans, but more errors in unreliable networks.
     1: delay time to timeout. Lower values equals to fast scans, but more timeouts in unreliable networks.
-    To simpler example see example_verbose.py
+    For simpler example see example_verbose.py
 """
 
 scan.return_down_hosts = False  # Return not found hosts
@@ -19,5 +19,5 @@ scan.retrycount = 3  # set the number of tries until timeout. Increase the scan 
 
 scan.verbose_run()  # scan the network in verbose mode. The results are printed in Python console.
 
-# The scan results are stored in the property 'results' and can be manipulated as did in the example.py
-# See documentation for more information about 'results' structure.
+# The scan results are stored in the 'results' property and can be manipulated as did in the example.py
+# See README.md for more information about 'results' structure.
