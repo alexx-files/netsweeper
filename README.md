@@ -106,7 +106,7 @@ This example show the optional parameters for ping and icmp packet.
 This is more complex example. It show how to run netsweeper with no interaction and how to interact with 
 scan results stored in the property 'results'.
 ```
-## Future functionalities before v1.0
+## What next? (before v1.0)
 ```
 1. Scan IP ranges
 2. Scan IP address
