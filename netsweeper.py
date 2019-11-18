@@ -12,7 +12,7 @@ from time import perf_counter
 
 class NetSweeper:
     """
-    Class to allow the creation of Netsweeper programs in Python
+    Class to allow the creation of Netsweeper programs in Python.
     Functions:
     __init__:
         (Constructor)
