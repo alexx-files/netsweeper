@@ -3,7 +3,7 @@ from netsweeper import NetSweeper
 scan = NetSweeper('192.168.100.0/24', 100, 1)
 """
 Where: 
-    '192.168.100.0/24': Network to be scanned.
+    '192.168.100.0/24': Network, IP Range or IP address to be scanned.
     100: Number of simultaneos ping threads. More threads equals to fast scans, but more errors in unreliable networks.
     1: delay time to timeout. Lower values equals to fast scans, but more timeouts in unreliable networks.
     For simpler example see example_verbose.py

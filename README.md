@@ -54,8 +54,8 @@ Found 5 hosts up in the network 192.168.0.0/24.
 ```
 #### Properties
 ```
-networkaddress (READ/WRITE)
-    str: define network address to be scanned
+dest_ips (READ/WRITE)
+    str: define network, IP range or IP address address to be scanned
 num_threads (READ/WRITE)
     int: define number of ping threads
 timeout (READ/WRITE)
