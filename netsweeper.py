@@ -227,7 +227,7 @@ class NetSweeper:
         Show the results formatted in the Python console"""
         start = perf_counter()
         # print(f'\nScanning the network: {self._networkaddress}\n')
-        print('\nNetSweeper version 0.2.5')
+        print('\nNetSweeper version 0.2.6')
         print('Scanning the network: {}\n'.format(self._networkaddress))
         self.return_unit = 'ms'
         self.run()
@@ -250,7 +250,7 @@ class NetSweeper:
                 #    f'\033['f'0m\t{self.results[key][3]}')
                 print('{:<16s} {}\t \033[31m{:.0f}ms\033[0m\t{}'.format(self.results[key][0], str(self.results[key][1]), self.results[key][2], self.results[key][3]))
         end = perf_counter()
-        print('\nElapsed time: {} seconds', format(round(end - start, 2)))
+        print('\nElapsed time: {} seconds'.format(round(end - start, 2)))
         hosts_up = 0
         for result in self.results:
             if self.results[result][1]:
