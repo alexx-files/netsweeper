@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 """Python class to allow programmers to create easily your own net sweeper scripts."""
+from __future__ import print_function
+
 from ipaddress import ip_address, ip_network
 from ping3 import ping
 from socket import gethostbyaddr
@@ -225,7 +227,7 @@ class NetSweeper:
         Show the results formatted in the Python console"""
         start = perf_counter()
         # print(f'\nScanning the network: {self._networkaddress}\n')
-        print('\nNetSweeper version 0.2.3')
+        print('\nNetSweeper version 0.2.4')
         print('Scanning the network: {}\n'.format(self._networkaddress))
         self.return_unit = 'ms'
         self.run()
