@@ -17,10 +17,10 @@ scan.icmp_seq = 0  # set icmp packet sequence
 scan.payload_size = 56  # set icmp packet payload size
 scan.retrycount = 3  # set the number of tries until timeout. Increase the scan time.
 
-scan.run()  # scan the network in verbose mode. The results are printed in Python console.
+scan.run()  # scan the network. The results are stored in the 'results' property.
 
-# The scan results are stored in the property 'results' and can be manipulated as following.
-# See documentation for more information about 'results' structure.
+# The scan results are stored in the 'results' property and can be manipulated as following.
+# See README.md for more information about 'results' structure.
 
 for key in sorted(scan.results.keys()):  # interact with sorted property 'results'
     print(f'IP Address: {scan.results[key][0]:<16s}', end='')  # print the IP Address. No \n at the end of the line.
