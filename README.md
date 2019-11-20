@@ -112,8 +112,8 @@ scan results stored in the property 'results'.
 2. IP address scan
 3. Use txt files as source for destination IP addresses
 4. Port Scan:
-    TCP Half Open
-    TCP Connect
-    UDP Port Scan
+    4.1. TCP Half Open
+    4.2. TCP Connect
+    4.3. UDP Port Scan
 5. Save the results to text files
 ```
