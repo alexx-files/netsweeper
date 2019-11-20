@@ -108,8 +108,8 @@ scan results stored in the property 'results'.
 ```
 ## What's next? (before v1.0)
 ```
-1. IP ranges scan
-2. IP address scan
+1. IP ranges scan (done v0.3.0)
+2. IP address scan (done v0.3.0)
 3. Use txt files as source for destination IP addresses
 4. Port Scan:
     4.1. TCP Half Open

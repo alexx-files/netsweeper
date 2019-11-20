@@ -3,7 +3,7 @@
 """Python class to allow programmers to create easily your own net sweeper scripts."""
 from __future__ import print_function
 
-from ipaddress import ip_address, ip_network
+from ipaddress import ip_address, ip_network, summarize_address_range
 from ping3 import ping
 from socket import gethostbyaddr
 from concurrent.futures import ThreadPoolExecutor
@@ -63,6 +63,7 @@ class NetSweeper:
 
     def __init__(self, dest_ips, num_threads, timeout=1):
         self.dest_ips = dest_ips  # str: define network address to be scanned
+        self._strdest_ips = dest_ips
         self.num_threads = num_threads  # int: define number of ping threads
         self.timeout = timeout  # int: define delay time until timeout
         self._scan_results = {}  # dct: results of network scan
@@ -74,9 +75,9 @@ class NetSweeper:
         self._payload_size = 56  # int: define icmp packet payload size
         self._retrycount = 1  # int: define the number of tries to send before timeout
 
-    ########################################################################################################################
-    #  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  GETTERS AND SETTERS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-    ########################################################################################################################
+    ####################################################################################################################
+    #  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  GETTERS AND SETTERS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+    ####################################################################################################################
 
     @property
     def return_unit(self):
@@ -144,7 +145,20 @@ class NetSweeper:
 
     @dest_ips.setter
     def dest_ips(self, dest_ips):
-        self._dest_ips = ip_network(dest_ips)
+        if dest_ips.find('/') != -1:
+            self._strdest_ips = dest_ips
+            self._dest_ips = list(ip_network(dest_ips).hosts())
+        elif dest_ips.find('-') != -1:
+            self._strdest_ips = dest_ips
+            first_ip, last_ip = dest_ips.split('-')
+            networks_in_range = list(summarize_address_range(ip_address(first_ip), ip_address(last_ip)))
+            ip_range = []
+            for network in networks_in_range:
+                ip_range += list(ip_network(network))
+            self._dest_ips = ip_range
+        else:
+            self._strdest_ips = dest_ips
+            self._dest_ips = ip_address(dest_ips)
 
     @property
     def timeout(self):
@@ -169,9 +183,9 @@ class NetSweeper:
         except Exception:
             return 'Hostname not found'
 
-    ########################################################################################################################
-    #  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  INTERNAL FUNCTION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-    ########################################################################################################################
+    ####################################################################################################################
+    #  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  INTERNAL FUNCTION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+    ####################################################################################################################
 
     def _ping_address(self, ipaddress, ping_timeout):
         """Ping an IP address
@@ -197,29 +211,30 @@ class NetSweeper:
         else:
             return ipaddress, False, ping_timeout * 1000, ''
 
-    ########################################################################################################################
-    #  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  CLASS METHODS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-    ########################################################################################################################
+    ####################################################################################################################
+    #  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  CLASS METHODS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+    ####################################################################################################################
 
     def run(self):
         """Execute the network scan using threads. The results are stored in the property 'results'.
         See properties documentation for more details."""
         self._scan_results.clear()  # Clear results of previous scans
-        networkaddresslist = list(ip_network(self.dest_ips).hosts())  # convert from string to networkaddress
-        timeout_list = []
-        for _ in networkaddresslist:  # create a list with timeout value in all positions
-            timeout_list.append(self.timeout)
-            # necessary because all args of function _ping_address must be iterators
-            # when using threads
-
-        with ThreadPoolExecutor(max_workers=self.num_threads) as executor:
-            threadsresults = executor.map(self._ping_address, networkaddresslist, timeout_list)
-            for result in threadsresults:
-                if self._return_down_hosts:
-                    self._scan_results[ip_address(result[0])] = result
-                else:
-                    if result[1]:
+        if isinstance(self._dest_ips, list):
+            timeout_list = []
+            for _ in self._dest_ips:  # create a list with timeout value in all positions
+                timeout_list.append(self.timeout)
+                # necessary because all args of function _ping_address must be iterators
+                # when using threads
+            with ThreadPoolExecutor(max_workers=self.num_threads) as executor:
+                threadsresults = executor.map(self._ping_address, list(self._dest_ips), timeout_list)
+                for result in threadsresults:
+                    if self._return_down_hosts:
                         self._scan_results[ip_address(result[0])] = result
+                    else:
+                        if result[1]:
+                            self._scan_results[ip_address(result[0])] = result
+        else:
+            self._scan_results[0] = self._ping_address(self._dest_ips, self._timeout)
 
     def verbose_run(self):
         """Execute the network scan using threads. The results are stored in the property 'results'.
@@ -228,7 +243,7 @@ class NetSweeper:
         start = perf_counter()
         # print(f'\nScanning: {self.dest_ips}\n')
         print('\nNetSweeper version 0.3.0')
-        print('Scanning: {}\n'.format(self.dest_ips))
+        print('Scanning: {}\n'.format(self._strdest_ips))
         self.return_unit = 'ms'
         self.run()
         for key in sorted(self.results.keys()):
@@ -256,4 +271,4 @@ class NetSweeper:
         for result in self.results:
             if self.results[result][1]:
                 hosts_up += 1
-        print('Found {} hosts up in {}.'.format(hosts_up, self.dest_ips))
+        print('Found {} hosts up in {}.'.format(hosts_up, self._strdest_ips))
