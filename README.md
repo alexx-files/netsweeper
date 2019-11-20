@@ -115,4 +115,5 @@ scan results stored in the property 'results'.
     TCP Half Open
     TCP Connect
     UDP Port Scan
+5. Save the results to text files
 ```
