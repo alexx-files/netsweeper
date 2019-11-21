@@ -57,7 +57,7 @@ class NetSweeper:
                          boolean: Host up=True Host down=False,
                          float: ping delay time (return the value of ping_timeout argument when the ping timeout,
                          str: The IP address hostname)
-            down_hosts (READ/WRITE)
+            return_down_hosts (READ/WRITE)
                 boolean: define if return or not the not found hosts. Default = False
             return_unit (READ/WRITE)
                 str: define the return unit for reply time (s) secs or (ms) mili secs
@@ -71,6 +71,8 @@ class NetSweeper:
                 int: define icmp packet payload size
             retrycount (READ/WRITE)
                 int: define the number of retries to send before timeout
+            filename: (READ/WRITE)
+                str: define the file name with IP address list
 
     Uses the ping() function from the library ping3 developed by kai@kyan001.com https://github.com/kyan001/ping3"""
 
@@ -227,13 +229,18 @@ class NetSweeper:
 
         ipaddress = str(ipaddress)
         ping_ip = 0
+        hostname = _gethostname(ipaddress).replace("'", "")
         for _ in range(self._retrycount):
-            ping_ip = ping(dest_addr=ipaddress, timeout=ping_timeout, unit=self._return_unit, src_addr=self._src_addr,
-                           ttl=self._packet_ttl, seq=self._icmp_seq, size=self._payload_size)
+            try:
+                ping_ip = ping(dest_addr=ipaddress, timeout=ping_timeout, unit=self._return_unit, src_addr=self._src_addr,
+                               ttl=self._packet_ttl, seq=self._icmp_seq, size=self._payload_size)
+            except Exception:
+                ping_ip = None
+                hostname = 'ping error'
             if type(ping_ip) == float:
                 break
         if type(ping_ip) == float:
-            return ipaddress.replace("'", ""), True, ping_ip, _gethostname(ipaddress).replace("'", "")
+            return ipaddress.replace("'", ""), True, ping_ip, hostname
         else:
             return ipaddress, False, ping_timeout * 1000, ''
 
