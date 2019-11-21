@@ -62,7 +62,7 @@ print_results() : Print in Python console the last scan results.
 #### Properties
 ```
 dest_ips (READ/WRITE)
-    str: define network, IP range or IP address address to be scanned
+    str: define network, IP range or IP address address to be scanned. File names are supported as well.
 num_threads (READ/WRITE)
     int: define number of ping threads
 timeout (READ/WRITE)
@@ -93,6 +93,8 @@ payload_size (READ/WRITE)
     int: define icmp packet payload size
 retrycount (READ/WRITE)
     int: define the number of tries to send before timeout
+filename: (READ/WRITE)
+    str: define the file name with IP address list
 ```
 
 ## Examples
