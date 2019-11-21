@@ -55,7 +55,8 @@ Found 5 hosts up in the network 192.168.0.0/24.
 #### Methods
 ```
 run() : Execute the scan and store the results in the 'results' property
-verbose_run() : Execute the scan printing the results in Python console and store the results in the 'results' property
+verbose_run() : Execute the scan printing the results in Python console.
+              : The results are also stored in the 'results' property.
 print_results() : Print in Python console the last scan results.
 ```
 dest_ips (READ/WRITE)
