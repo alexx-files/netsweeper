@@ -9,7 +9,7 @@ Where:
     For simpler example see example_verbose.py
 """
 
-scan.return_down_hosts = False  # Return not found hosts
+scan.return_down_hosts = True  # Return not found hosts
 scan.return_unit = 'ms'  # return the reply delay time in miliseconds. Verbose mode only work in miliseconds.
 scan.src_addr = '192.168.100.101'  # set the source IP address
 scan.packet_ttl = 32  # set icmp packet time to live

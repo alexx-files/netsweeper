@@ -242,7 +242,7 @@ class NetSweeper:
         if type(ping_ip) == float:
             return ipaddress.replace("'", ""), True, ping_ip, hostname
         else:
-            return ipaddress, False, ping_timeout * 1000, ''
+            return ipaddress, False, ping_timeout * 1000, hostname
 
     ####################################################################################################################
     #  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  CLASS METHODS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
@@ -275,7 +275,7 @@ class NetSweeper:
         Show the results formatted in the Python console"""
         start = perf_counter()
         # print(f'\nScanning: {self.dest_ips}\n')
-        print('\nNetSweeper version 0.4.1')
+        print('\nNetSweeper version 0.4.2')
         print('Scanning: {}\n'.format(self._strdest_ips))
         self.return_unit = 'ms'
         self.run()
