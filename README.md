@@ -110,7 +110,7 @@ scan results stored in the property 'results'.
 ```
 1. IP ranges scan (done v0.3.0)
 2. IP address scan (done v0.3.0)
-3. Use txt files as source for destination IP addresses
+3. Use txt files as source for destination IP addresses (done v0.4.0)
 4. Port Scan:
     4.1. TCP Half Open
     4.2. TCP Connect

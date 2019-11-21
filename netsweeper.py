@@ -10,6 +10,19 @@ from concurrent.futures import ThreadPoolExecutor
 from time import perf_counter
 
 
+def _read_file(fileName):
+    linelist = open(fileName, 'r').read().splitlines()
+    return linelist
+
+
+def _gethostname(ipaddress):
+    try:
+        data = gethostbyaddr(ipaddress)
+        return repr(data[0])
+    except Exception:
+        return 'Hostname not found'
+
+
 class NetSweeper:
     """
     Class to allow the creation of Netsweeper programs in Python.
@@ -74,6 +87,7 @@ class NetSweeper:
         self._icmp_seq = 0  # int: define icmp packet sequence
         self._payload_size = 56  # int: define icmp packet payload size
         self._retrycount = 1  # int: define the number of tries to send before timeout
+        self._filename = None  # str: define the file name with IP address list
 
     ####################################################################################################################
     #  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  GETTERS AND SETTERS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
@@ -136,6 +150,15 @@ class NetSweeper:
         self._return_down_hosts = return_down_hosts
 
     @property
+    def filename(self):
+        return self._filename
+
+    @filename.setter
+    def filename(self, filename):
+        self._filename = filename
+        self.dest_ips = filename
+
+    @property
     def results(self):
         return self._scan_results
 
@@ -145,10 +168,10 @@ class NetSweeper:
 
     @dest_ips.setter
     def dest_ips(self, dest_ips):
-        if dest_ips.find('/') != -1:
+        if dest_ips.find('/') != -1:  # If / than is a network address
             self._strdest_ips = dest_ips
             self._dest_ips = list(ip_network(dest_ips).hosts())
-        elif dest_ips.find('-') != -1:
+        elif dest_ips.find('-') != -1:  # if - than is a IP range
             self._strdest_ips = dest_ips
             first_ip, last_ip = dest_ips.split('-')
             networks_in_range = list(summarize_address_range(ip_address(first_ip), ip_address(last_ip)))
@@ -157,8 +180,18 @@ class NetSweeper:
                 ip_range += list(ip_network(network))
             self._dest_ips = ip_range
         else:
-            self._strdest_ips = dest_ips
-            self._dest_ips = ip_address(dest_ips)
+            isfile = True
+            character = 0
+            while not (dest_ips[character].isalpha()):
+                isfile = False
+                character += 1
+                break
+            if isfile:
+                self._strdest_ips = self._filename
+                self._dest_ips = _read_file(self._filename)
+            else:
+                self._strdest_ips = dest_ips
+                self._dest_ips = ip_address(dest_ips)
 
     @property
     def timeout(self):
@@ -176,15 +209,8 @@ class NetSweeper:
     def num_threads(self, num_threads):
         self._num_threads = num_threads
 
-    def _gethostname(self, ipaddress):
-        try:
-            data = gethostbyaddr(ipaddress)
-            return repr(data[0])
-        except Exception:
-            return 'Hostname not found'
-
     ####################################################################################################################
-    #  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  INTERNAL FUNCTION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+    #  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  INTERNAL FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     ####################################################################################################################
 
     def _ping_address(self, ipaddress, ping_timeout):
@@ -207,7 +233,7 @@ class NetSweeper:
             if type(ping_ip) == float:
                 break
         if type(ping_ip) == float:
-            return ipaddress.replace("'", ""), True, ping_ip, self._gethostname(ipaddress).replace("'", "")
+            return ipaddress.replace("'", ""), True, ping_ip, _gethostname(ipaddress).replace("'", "")
         else:
             return ipaddress, False, ping_timeout * 1000, ''
 
@@ -242,7 +268,7 @@ class NetSweeper:
         Show the results formatted in the Python console"""
         start = perf_counter()
         # print(f'\nScanning: {self.dest_ips}\n')
-        print('\nNetSweeper version 0.3.0')
+        print('\nNetSweeper version 0.4.0')
         print('Scanning: {}\n'.format(self._strdest_ips))
         self.return_unit = 'ms'
         self.run()
@@ -251,20 +277,23 @@ class NetSweeper:
                 # print(
                 # f'{self.results[key][0]:<16s}{str(self.results[key][1]):<7s}\033[32m{self.results[key][2]:>4.0f}ms'
                 # f'\033['f'0m\t{self.results[key][3]}')
-                print('{:<16s} {:<4s} \033[32m{:>4.0f}ms\033[0m\t{}'.format(self.results[key][0], str(self.results[key][1]),
-                                                                        self.results[key][2], self.results[key][3]))
+                print('{:<16s} {:<4s} \033[32m{:>4.0f}ms\033[0m\t{}'.format(self.results[key][0],
+                                                                            str(self.results[key][1]),
+                                                                            self.results[key][2], self.results[key][3]))
             elif self.results[key][2] <= 500:
                 # print(
                 #    f'{self.results[key][0]:<16s}{str(self.results[key][1]):<7}\033[33m{self.results[key][2]:>4.0f}ms'
                 #    f'\033['f'0m\t{self.results[key][3]}')
-                print('{:<16s} {:<4s} \033[33m{:>4.0f}ms\033[0m\t{}'.format(self.results[key][0], str(self.results[key][1]),
-                                                                        self.results[key][2], self.results[key][3]))
+                print('{:<16s} {:<4s} \033[33m{:>4.0f}ms\033[0m\t{}'.format(self.results[key][0],
+                                                                            str(self.results[key][1]),
+                                                                            self.results[key][2], self.results[key][3]))
             else:
                 # print(
                 #    f'{self.results[key][0]:<16s}{str(self.results[key][1]):<7}\033[31m{self.results[key][2]:>4.0f}ms'
                 #    f'\033['f'0m\t{self.results[key][3]}')
-                print('{:<16s} {:<4s} \033[31m{:>4.0f}ms\033[0m\t{}'.format(self.results[key][0], str(self.results[key][1]),
-                                                                        self.results[key][2], self.results[key][3]))
+                print('{:<16s} {:<4s} \033[31m{:>4.0f}ms\033[0m\t{}'.format(self.results[key][0],
+                                                                            str(self.results[key][1]),
+                                                                            self.results[key][2], self.results[key][3]))
         end = perf_counter()
         print('\nElapsed time: {} seconds'.format(round(end - start, 2)))
         hosts_up = 0
@@ -272,3 +301,31 @@ class NetSweeper:
             if self.results[result][1]:
                 hosts_up += 1
         print('Found {} hosts up in {}.'.format(hosts_up, self._strdest_ips))
+
+    def print_results(self):
+        """Show results formatted in the Python console"""
+        for key in sorted(self.results.keys()):
+            if self.results[key][2] <= 100:
+                # print(
+                # f'{self.results[key][0]:<16s}{str(self.results[key][1]):<7s}\033[32m{self.results[key][2]:>4.0f}ms'
+                # f'\033['f'0m\t{self.results[key][3]}')
+                print('{:<16s} {:<4s} \033[32m{:>4.0f}ms\033[0m\t{}'.format(self.results[key][0],
+                                                                            str(self.results[key][1]),
+                                                                            self.results[key][2],
+                                                                            self.results[key][3]))
+            elif self.results[key][2] <= 500:
+                # print(
+                #    f'{self.results[key][0]:<16s}{str(self.results[key][1]):<7}\033[33m{self.results[key][2]:>4.0f}ms'
+                #    f'\033['f'0m\t{self.results[key][3]}')
+                print('{:<16s} {:<4s} \033[33m{:>4.0f}ms\033[0m\t{}'.format(self.results[key][0],
+                                                                            str(self.results[key][1]),
+                                                                            self.results[key][2],
+                                                                            self.results[key][3]))
+            else:
+                # print(
+                #    f'{self.results[key][0]:<16s}{str(self.results[key][1]):<7}\033[31m{self.results[key][2]:>4.0f}ms'
+                #    f'\033['f'0m\t{self.results[key][3]}')
+                print('{:<16s} {:<4s} \033[31m{:>4.0f}ms\033[0m\t{}'.format(self.results[key][0],
+                                                                            str(self.results[key][1]),
+                                                                            self.results[key][2],
+                                                                            self.results[key][3]))
