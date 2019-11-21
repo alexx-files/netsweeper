@@ -59,7 +59,6 @@ verbose_run() : Execute the scan printing the results in Python console.
               : The results are also stored in the 'results' property.
 print_results() : Print in Python console the last scan results.
 ```
-dest_ips (READ/WRITE)
 #### Properties
 ```
 dest_ips (READ/WRITE)
