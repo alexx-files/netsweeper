@@ -52,10 +52,17 @@ Scanning the network: 192.168.0.0/24
 Elapsed time: 6.83 seconds
 Found 5 hosts up in the network 192.168.0.0/24.
 ```
+#### Methods
+```
+run() : Execute the scan and store the results in the 'results' property
+verbose_run() : Execute the scan printing the results in Python console.
+              : The results are also stored in the 'results' property.
+print_results() : Print in Python console the last scan results.
+```
 #### Properties
 ```
 dest_ips (READ/WRITE)
-    str: define network, IP range or IP address address to be scanned
+    str: define network, IP range or IP address address to be scanned. File names are supported as well.
 num_threads (READ/WRITE)
     int: define number of ping threads
 timeout (READ/WRITE)
@@ -86,6 +93,8 @@ payload_size (READ/WRITE)
     int: define icmp packet payload size
 retrycount (READ/WRITE)
     int: define the number of tries to send before timeout
+filename: (READ/WRITE)
+    str: define the file name with IP address list
 ```
 
 ## Examples
