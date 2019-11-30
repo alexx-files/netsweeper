@@ -424,7 +424,7 @@ class NetSweeper:
         """Execute the network scan using threads. The results are stored in the property 'results'.
         See properties documentation for more details.
 
-        Show the results formatted in the Python console"""
+        Show the results formatted in the Python console."""
         start = perf_counter()
         # print(f'\nScanning: {self.dest_ips}\n')
         print('\nNetSweeper version 0.5.2')
