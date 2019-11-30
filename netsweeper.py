@@ -66,7 +66,7 @@ def _single_ip_port_scan(ipaddress, numthreads, ports):
                 raise RuntimeError('Too many threads, you have reached your system limit. '
                                    'Reduce the number of threads.')
             else:
-                raise RuntimeError(f'Your program finished with the error: {runtime_error}')
+                raise RuntimeError('Your program finished with the error: {}'.format(runtime_error))
         for result in threadsresults:
             if result[1]:
                 portscanresults.append(result[1])
