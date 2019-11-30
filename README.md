@@ -95,6 +95,11 @@ retrycount (READ/WRITE)
     int: define the number of tries to send before timeout
 filename: (READ/WRITE)
     str: define the file name with IP address list
+scanports = (0, 0)  # list/tuple/str: define the ports to be scanned. See example_tcp_half_open.py
+scan_down_host_ports = False  # boolean: define if port scan will run for host that not answered
+                              # the ping request.
+max_ports_scan_threads = 10  # Interger: define the number of ports that will be scanned
+                             # simultaneously per host.
 ```
 
 ## Examples
@@ -122,6 +127,23 @@ scan results stored in the property 'results'.
 3. Use txt files as source for destination IP addresses (done v0.4.0)
 4. Port Scan:
     4.1. TCP Half Open
+    4.2. TCP Connect
+    4.3. UDP Port Scan
+5. Save the results to text files
+```
+
+### example_tcp_half_open.py
+```
+This example show the usage of TCP Half Open functionality.
+```
+
+## What's next? (before v1.0)
+```
+1. IP ranges scan (done v0.3.0)
+2. IP address scan (done v0.3.0)
+3. Use txt files as source for destination IP addresses (done v0.4.0)
+4. Port Scan:
+    4.1. TCP Half Open (done v0.5.0)
     4.2. TCP Connect
     4.3. UDP Port Scan
 5. Save the results to text files
