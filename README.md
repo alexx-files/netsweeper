@@ -120,17 +120,6 @@ This example show the optional parameters for ping and icmp packet.
 This is more complex example. It show how to run netsweeper with no interaction and how to interact with 
 scan results stored in the property 'results'.
 ```
-## What's next? (before v1.0)
-```
-1. IP ranges scan (done v0.3.0)
-2. IP address scan (done v0.3.0)
-3. Use txt files as source for destination IP addresses (done v0.4.0)
-4. Port Scan:
-    4.1. TCP Half Open
-    4.2. TCP Connect
-    4.3. UDP Port Scan
-5. Save the results to text files
-```
 
 ### example_tcp_half_open.py
 ```
