@@ -95,11 +95,12 @@ retrycount (READ/WRITE)
     int: define the number of tries to send before timeout
 filename: (READ/WRITE)
     str: define the file name with IP address list
-scanports = (0, 0)  # list/tuple/str: define the ports to be scanned. See example_tcp_half_open.py
-scan_down_host_ports = False  # boolean: define if port scan will run for host that not answered
-                              # the ping request.
-max_ports_scan_threads = 10  # Interger: define the number of ports that will be scanned
-                             # simultaneously per host.
+scanports = (0, 0)
+    list/tuple/str: define the ports to be scanned. See example_tcp_half_open.py
+scan_down_host_ports = False
+    boolean: define if port scan will run for host that not answered the ping request.
+max_ports_scan_threads = 10
+    interger: define the number of ports that will be scanned simultaneously per host.
 ```
 
 ## Examples
