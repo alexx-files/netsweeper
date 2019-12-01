@@ -10,7 +10,7 @@ are net sweepers that can be used and improved.
 ## Installation
 
 ```shell
-pip install netsweeper  # install netsweeper
+pip3 install netsweeper  # install netsweeper
 ```
 ## Usage
 
@@ -123,7 +123,7 @@ scan results stored in the property 'results'.
 
 ### example_tcp_half_open.py
 ```
-This example show the usage of TCP Half Open functionality.
+This example show the usage of TCP Half Open port scan functionality.
 ```
 
 ## What's next? (before v1.0)
