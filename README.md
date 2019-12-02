@@ -1,6 +1,7 @@
 # netsweeper
 [![GitHub contributors](https://img.shields.io/github/contributors/alexx-files/netsweeper.svg)](https://github.com/alexx-files/netsweeper/graphs/contributors/)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/netsweeper.svg)
+[![Github All Releases](https://img.shields.io/github/downloads/alexx-files/netsweeper/total.svg)]()
 
 Python class to allow programmers to easily create your own net sweeper scripts. The examples provided already
 are net sweepers that can be used and improved.
