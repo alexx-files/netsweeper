@@ -1,6 +1,6 @@
 # netsweeper
 [![GitHub contributors](https://img.shields.io/github/contributors/alexx-files/netsweeper.svg)](https://github.com/alexx-files/netsweeper/graphs/contributors/)
-![PyPI -PyPI Downloads](https://img.shields.io/pypi/dm/netsweeper.svg)
+![Downloads](https://img.shields.io/github/downloads/alexx-files/netsweeper/total)
 ![GitHub release](https://img.shields.io/github/release/alexx-files/netsweeper.svg)
 [![GitHub license](https://img.shields.io/github/license/alexx-files/netsweeper)](https://github.com/alexx-files/netsweeper/blob/master/LICENSE)
 
