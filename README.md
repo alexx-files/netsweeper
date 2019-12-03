@@ -7,7 +7,7 @@
 Python class to allow programmers to easily create your own net sweeper scripts. The examples provided already
 are net sweepers that can be used and improved.
 
-> Requires Ping3 https://github.com/kyan001/ping3 (Downloaded automaticaly)\
+> Requires Ping3 https://github.com/kyan001/ping3 (Downloaded automatically)\
 > Tested under Linux and Windows
 
 ## Installation
