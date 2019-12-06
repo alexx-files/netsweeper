@@ -137,7 +137,7 @@ This example show the usage of TCP Half Open port scan functionality.
 3. Use txt files as source for destination IP addresses (done v0.4.0)
 4. Port Scan:
     4.1. TCP Half Open (done v0.5.0)
-    4.2. TCP Connect
-    4.3. UDP Port Scan
+    4.2. UDP Port Scan
+    4.3. Banner Grabber
 5. Save the results to text files
 ```
